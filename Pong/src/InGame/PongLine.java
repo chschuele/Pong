@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pong;
+package InGame;
 
 /**
  *
  * @author chSch
  */
+import InGame.DirectionVector;
 import java.awt.geom.Line2D;
 
 public class PongLine extends Line2D.Double {

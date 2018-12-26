@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pong;
+package InGame;
 
 /**
  *
  * @author chSch
  */
+import InGame.DirectionVector;
 import java.awt.geom.Point2D;
 import javax.swing.Timer;
 
