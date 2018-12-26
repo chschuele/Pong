@@ -9,8 +9,7 @@ package InGame;
  *
  * @author chSch
  */
-public enum Side
-{
+public enum Side {
     LEFT,
     RIGHT,
     TOP,
