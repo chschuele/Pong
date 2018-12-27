@@ -46,6 +46,8 @@ public class PlayFieldPanel extends JPanel {
      * @return
      */
     public PlayFieldPanel(Dimension playFieldSize, HashSet<PongLine> lines, Puck puck) {
+       this.setPreferredSize(playFieldSize);
+       this.setVisible(true);
         throw new UnsupportedOperationException("not yet implemented");
     }
 

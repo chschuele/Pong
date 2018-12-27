@@ -52,7 +52,18 @@ public class Player extends PongLine {
      * @param direction
      */
     public void startMove(Side direction) {
-        throw new UnsupportedOperationException("not yet implemented");
+        switch (direction) {
+            case LEFT:
+                break;
+            case RIGHT:
+                break;
+            case BOTTOM:
+                break;
+            case TOP:
+                break;
+            default:
+                break;
+        }
     }
 
     /**

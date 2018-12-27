@@ -10,6 +10,7 @@ package pong;
  * @author chSch
  */
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class Application {
 
@@ -26,13 +27,33 @@ public class Application {
     /**
      * Root JFrame into which we put our JComponents we want to show.
      */
-    protected static final JFrame ROOTFRAME = new JFrame();
-
+    public static final JFrame ROOTFRAME = new JFrame();
+    public static MainMenu menu;
     /**
      * Operation main
      *
      * @param args - CLI arguments
      */
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Application();
+            }
+        });
+
     }
+
+    public Application() {
+        ROOTFRAME.setTitle("Pong");
+        ROOTFRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ROOTFRAME.setSize(500, 300);
+        //Fenster in der Mitte des Bildschirms
+        ROOTFRAME.setLocationRelativeTo(null);
+        menu = new MainMenu();
+        ROOTFRAME.add(menu);
+        ROOTFRAME.setVisible(true);
+
+    }
+
 }

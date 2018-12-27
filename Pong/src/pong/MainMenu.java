@@ -9,9 +9,12 @@ package pong;
  *
  * @author chSch
  */
-import javax.swing.JButton;
+import InGame.InGame;
+import java.awt.Dimension;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 /**
  * First JPanel that get's visible, asking for width and height of playfield.
  * Buttons for exiting and starting the game.
@@ -56,8 +59,18 @@ public class MainMenu extends JPanel {
         jLabel2.setText("Please fill out width and height to create your preferred playfield");
 
         btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         btnStartNewGame.setText("Start New Game");
+        btnStartNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartNewGameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Width");
 
@@ -132,6 +145,30 @@ public class MainMenu extends JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtWidthActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnStartNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartNewGameActionPerformed
+
+        if (txtHeight.getText().isEmpty() || txtWidth.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill out width and Height");
+        } else if (Pattern.matches("[a-zA-Z]+", txtHeight.getText()) || Pattern.matches("[a-zA-Z]+", txtWidth.getText())) {
+            JOptionPane.showMessageDialog(null, "Please enter only numbers");
+        } else {
+            Application.ROOTFRAME.remove(Application.menu);
+            InGame gamePanel = new InGame();
+            Application.ROOTFRAME.add(gamePanel);
+        }
+
+
+    }//GEN-LAST:event_btnStartNewGameActionPerformed
+
+    public static Dimension getDimension() {
+        Dimension playFieldSize = new Dimension(Integer.valueOf(txtWidth.getText()), Integer.valueOf(txtHeight.getText()));
+        return playFieldSize;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -140,7 +177,7 @@ public class MainMenu extends JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtHeight;
-    private javax.swing.JTextField txtWidth;
+    public static javax.swing.JTextField txtHeight;
+    public static javax.swing.JTextField txtWidth;
     // End of variables declaration//GEN-END:variables
 }

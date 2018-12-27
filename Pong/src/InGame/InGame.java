@@ -9,11 +9,13 @@ package InGame;
  *
  * @author chSch
  */
+import pong.MainMenu;
 import java.awt.Dimension;
 import java.util.HashSet;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import pong.Application;
 
 /**
  * The complete ingame logic is handled from here.
@@ -103,7 +105,8 @@ public class InGame extends JPanel {
      * with.
      */
     public void initPlayFieldPanel(Dimension playFieldSize) {
-        throw new UnsupportedOperationException("not yet implemented");
+       // throw new UnsupportedOperationException("not yet implemented");
+       Application.ROOTFRAME.setSize(playFieldSize);
     }
 
     //Operation to init statsPanel
