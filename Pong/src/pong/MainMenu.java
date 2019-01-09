@@ -159,8 +159,8 @@ public class MainMenu extends JPanel {
         } else {
             Application.ROOTFRAME.remove(Application.menu);
             Dimension playFieldSize = getDimension();
-            PlayFieldPanel gamePanel = new PlayFieldPanel(playFieldSize, );
-            Application.ROOTFRAME.add(gamePanel);
+//            PlayFieldPanel gamePanel = new PlayFieldPanel(playFieldSize, );
+//            Application.ROOTFRAME.add(gamePanel);
         }
 
 
