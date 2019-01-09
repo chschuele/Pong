@@ -10,6 +10,7 @@ package pong;
  * @author chSch
  */
 import InGame.InGame;
+import InGame.PlayFieldPanel;
 import java.awt.Dimension;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -157,7 +158,8 @@ public class MainMenu extends JPanel {
             JOptionPane.showMessageDialog(null, "Please enter only numbers");
         } else {
             Application.ROOTFRAME.remove(Application.menu);
-            InGame gamePanel = new InGame();
+            Dimension playFieldSize = getDimension();
+            PlayFieldPanel gamePanel = new PlayFieldPanel(playFieldSize, );
             Application.ROOTFRAME.add(gamePanel);
         }
 
@@ -165,11 +167,19 @@ public class MainMenu extends JPanel {
     }//GEN-LAST:event_btnStartNewGameActionPerformed
 
     public static Dimension getDimension() {
-        Dimension playFieldSize = new Dimension(Integer.valueOf(txtWidth.getText()), Integer.valueOf(txtHeight.getText()));
+        Dimension playFieldSize = new Dimension(getWidthPlayfield(),getHeightPlayfield() );
         return playFieldSize;
     }
-
-
+    
+    public static int getWidthPlayfield(){
+        return Integer.valueOf(txtWidth.getText());
+    }
+    
+    public static int getHeightPlayfield(){
+        return Integer.valueOf(txtHeight.getText());
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnStartNewGame;

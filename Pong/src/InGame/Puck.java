@@ -10,38 +10,38 @@ package InGame;
  * @author chSch
  */
 import InGame.DirectionVector;
+import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import javax.swing.Timer;
+import pong.MainMenu;
 
 public class Puck extends Point2D.Double {
 
     /**
-     * Attributes
-     */
-
-    /**
      * diameter the puck optically has
      */
-    public final int DIAMETER = 10;
+    public static final int DIAMETER = 10;
+    private double ballX; 
+    private double ballY;
 
+    public static double getBallX() {
+        return  MainMenu.getWidthPlayfield()/2;
+    }
+
+    public static double getBallY() {
+        return MainMenu.getHeightPlayfield()/2;
+    }
     /**
      * timer that moves the puck in it's vectors direction
      */
     private Timer mover;
 
     /**
-     * Associations
-     */
-    /**
      * pucks direction
      */
     private DirectionVector unitVector;
 
-    /**
-     * Operation Puck
-     *
-     * @return
-     */
+
     public Puck() {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -70,15 +70,15 @@ public class Puck extends Point2D.Double {
     /**
      * starts the timer that moves the puck
      */
-    public void start() {
+    public void start(Timer timer) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
      * stops the timer that moves the puck
      */
-    public void stop() {
-        throw new UnsupportedOperationException("not yet implemented");
+    public void stop(Timer timer) {
+        timer.stop();
     }
 
     /**
@@ -104,4 +104,5 @@ public class Puck extends Point2D.Double {
     public void move() {
         throw new UnsupportedOperationException("not yet implemented");
     }
+    
 }

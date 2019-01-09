@@ -14,9 +14,6 @@ import java.awt.geom.Line2D;
 
 public class PongLine extends Line2D.Double {
 
-    /**
-     * Attributes
-     */
     public final float WIDTH = 3;
 
     /**
@@ -88,5 +85,6 @@ public class PongLine extends Line2D.Double {
      */
     public DirectionVector getDirectionVector() {
         throw new UnsupportedOperationException("not yet implemented");
+        
     }
 }

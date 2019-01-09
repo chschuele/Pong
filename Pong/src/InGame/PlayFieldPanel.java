@@ -9,6 +9,7 @@ package InGame;
  *
  * @author chSch
  */
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Line2D;
@@ -50,7 +51,7 @@ public class PlayFieldPanel extends JPanel {
        this.setVisible(true);
         throw new UnsupportedOperationException("not yet implemented");
     }
-
+    
     /**
      * Operation initComponents
      *
@@ -68,6 +69,19 @@ public class PlayFieldPanel extends JPanel {
      * @param gc - Graphics to draw on
      */
     public void paintComponent(Graphics gc) {
-        throw new UnsupportedOperationException("not yet implemented");
+        super.paintComponent(gc);
+		
+        // Draw the ball
+        int x = (int)(Puck.getBallX() - Puck.DIAMETER);
+        int y = (int)(Puck.getBallY() - Puck.DIAMETER);
+        int size = 2*Puck.DIAMETER;
+        gc.setColor(Color.RED);
+        gc.fillOval(x, y, size, size);
+
+//        // Draw the paddles
+//        g.setColor(Color.BLUE);
+//        g.fillRect(5, aY - paddleSize/2, 15, paddleSize);
+//        g.setColor(Color.BLUE);
+//        g.fillRect(getWidth() - 20, bY - paddleSize/2, 15, paddleSize);
     }
 }
