@@ -15,8 +15,10 @@ import javax.swing.table.AbstractTableModel;
 public class HighscoreTableModel extends AbstractTableModel {
 
     private String[] columns = {"Player", "Score"};
+    private LinkedList<Highscore> highscores;
 
-    public HighscoreTableModel(LinkedList<Highscore> highscores) {
+    public HighscoreTableModel() {
+//        this.highscores = highscores;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class HighscoreTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return highscores.size();
     }
 
     @Override
@@ -36,11 +38,11 @@ public class HighscoreTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (columnIndex == 0) {
-            return rowIndex + 1;
+        if(columnIndex == 0) {
+            return highscores.get(rowIndex).getPlayerName();
         }
-        //if(columnIndex == 1) return ;
-        return null;
+        return highscores.get(rowIndex).getScore();
+        
     }
 
 }

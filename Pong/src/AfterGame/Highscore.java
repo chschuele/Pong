@@ -18,4 +18,12 @@ public class Highscore {
         this.playerName = playerName;
         this.score = score;
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    int getScore() {
+        return score;
+    }
 }
