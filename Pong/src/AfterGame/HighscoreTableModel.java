@@ -5,7 +5,10 @@
  */
 package AfterGame;
 
-import java.util.LinkedList;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -13,12 +16,22 @@ import javax.swing.table.AbstractTableModel;
  * @author Chauntalle Schüle, Dominik Gryska, Ivan 
  */
 public class HighscoreTableModel extends AbstractTableModel {
-
+    
     private String[] columns = {"Player", "Score"};
-    private LinkedList<Highscore> highscores;
+    private ArrayList<Highscore> highscores;
 
     public HighscoreTableModel() {
-//        this.highscores = highscores;
+        this.highscores = new ArrayList<>();
+        try {
+            String scores = HttpRequest.getRequest("http://dreamlo.com/lb/5c35f6e4b6397e0c2406823a/pipe");
+            String[] scorelines = scores.split("\n");
+            for (String scoreline : scorelines) {
+                String[] data = scoreline.split("\\|");
+                highscores.add(new Highscore(data[0], Integer.parseInt(data[1])));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(HighscoreTableModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

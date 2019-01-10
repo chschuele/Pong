@@ -15,12 +15,10 @@ import javax.swing.JTable;
  * @author Chauntalle Schüle, Dominik Gryska, Ivan 
  */
 public class Highscores extends JPanel {
-    
-    public static LinkedList<Highscore> highscores;
     /**
      * Creates new form Highscores1
      */
-    public Highscores(Highscore playedHighscore) {
+    public Highscores() {
 //        JScrollPane scrollPane = new JScrollPane();
 //        JTable table = new JTable(new HighscoreTableModel(highscores));
 //        scrollPane.setViewportView(table);
@@ -72,7 +70,8 @@ public class Highscores extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainmenu_button))
+                .addComponent(mainmenu_button)
+                .addContainerGap())
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("Highscores_label");

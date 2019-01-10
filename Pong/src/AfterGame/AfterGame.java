@@ -7,10 +7,12 @@ package AfterGame;
 
 /**
  *
- * @author Chauntalle Schüle, Dominik Gryska, Ivan 
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
-
+import java.io.IOException;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,6 +21,8 @@ import javax.swing.JPanel;
  */
 public class AfterGame extends JPanel {
     
+    private final String addScoresURL = "http://dreamlo.com/lb/rOMiiqMZZU-1k_Q2SayEdg4iDfDzwzXEGFexY1xQhmxw/add/";
+
     /**
      * Creates new form AfterGame1
      */
@@ -47,7 +51,7 @@ public class AfterGame extends JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         btnSkip.setText("Skip");
         btnSkip.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +81,7 @@ public class AfterGame extends JPanel {
 
         jLabel3.setText("Your score");
 
-        lblScore.setText("");
+        lblScore.setText("50");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,10 +142,16 @@ public class AfterGame extends JPanel {
     }//GEN-LAST:event_btnSkipActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        if (txtPlayer.getText().isEmpty()){
+        if (txtPlayer.getText().isEmpty() || lblScore.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter your name to save your score");
-        } else{
+        } else {
             Highscore highscore = new Highscore(txtPlayer.getText(), Integer.valueOf(lblScore.getText()));
+
+            try {
+                String scores = HttpRequest.getRequest(addScoresURL + highscore.toString());
+            } catch (IOException ex) {
+                Logger.getLogger(HighscoreTableModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnNextActionPerformed
 

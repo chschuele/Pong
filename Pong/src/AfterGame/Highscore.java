@@ -14,7 +14,7 @@ public class Highscore {
     public final String playerName;
     public final int score;
 
-    public Highscore(String playerName, int score) {
+    public Highscore(String playerName, Integer score) {
         this.playerName = playerName;
         this.score = score;
     }
@@ -25,5 +25,10 @@ public class Highscore {
 
     int getScore() {
         return score;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s/%s", getPlayerName(), getScore());
     }
 }
