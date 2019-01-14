@@ -28,7 +28,6 @@ public class Application {
      * Root JFrame into which we put our JComponents we want to show.
      */
     public static final JFrame ROOTFRAME = new JFrame();
-    public static MainMenu menu;
     /**
      * Operation main
      *
@@ -45,15 +44,7 @@ public class Application {
     }
 
     public Application() {
-        ROOTFRAME.setTitle("Pong");
-        ROOTFRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ROOTFRAME.setSize(500, 300);
-        //Fenster in der Mitte des Bildschirms
-        ROOTFRAME.setLocationRelativeTo(null);
-        menu = new MainMenu();
-        ROOTFRAME.add(menu);
-        ROOTFRAME.setVisible(true);
-
+        MainMenu.showMainMenu();
     }
 
 }

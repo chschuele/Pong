@@ -105,8 +105,6 @@ public class InGame extends JPanel {
      * with.
      */
     public void initPlayFieldPanel(Dimension playFieldSize) {
-       // throw new UnsupportedOperationException("not yet implemented");
-       Application.ROOTFRAME.setSize(playFieldSize);
     }
 
     //Operation to init statsPanel
@@ -125,7 +123,8 @@ public class InGame extends JPanel {
     }
 
     /**
-     * Operation to movePlayer.<br /> get's called from the Timer that moves the
+     * Operation to movePlayer.
+     * get's called from the Timer that moves the
      * player
      *
      * @param moveMent - value the puck should be moved

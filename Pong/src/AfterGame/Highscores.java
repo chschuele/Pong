@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.util.LinkedList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import pong.MainMenu;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Highscores extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         mainmenu_button = new javax.swing.JButton();
+        playBtn = new javax.swing.JButton();
 
         jLabel1.setText("Highscores");
 
@@ -45,6 +47,18 @@ public class Highscores extends JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         mainmenu_button.setText("Main Menu");
+        mainmenu_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainmenu_buttonActionPerformed(evt);
+            }
+        });
+
+        playBtn.setText("Play");
+        playBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,7 +72,8 @@ public class Highscores extends JPanel {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(playBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(mainmenu_button)))
                 .addContainerGap())
         );
@@ -70,12 +85,22 @@ public class Highscores extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mainmenu_button)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mainmenu_button)
+                    .addComponent(playBtn))
                 .addContainerGap())
         );
 
         jLabel1.getAccessibleContext().setAccessibleName("Highscores_label");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mainmenu_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainmenu_buttonActionPerformed
+        MainMenu.showMainMenu();
+    }//GEN-LAST:event_mainmenu_buttonActionPerformed
+
+    private void playBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBtnActionPerformed
+        MainMenu.showPong();
+    }//GEN-LAST:event_playBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -83,5 +108,6 @@ public class Highscores extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton mainmenu_button;
+    private javax.swing.JButton playBtn;
     // End of variables declaration//GEN-END:variables
 }

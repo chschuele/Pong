@@ -9,26 +9,33 @@ package pong;
  *
  * @author chSch
  */
-import InGame.InGame;
-import InGame.PlayFieldPanel;
+import AfterGame.AfterGame;
+import AfterGame.Highscores;
+import InGame.Pong;
 import java.awt.Dimension;
 import java.util.regex.Pattern;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import static pong.Application.ROOTFRAME;
 
 /**
  * First JPanel that get's visible, asking for width and height of playfield.
  * Buttons for exiting and starting the game.
  */
 public class MainMenu extends JPanel {
+    
+    static public MainMenu mainMenu = new MainMenu();
+    static public Pong pong;
+    static public AfterGame afterGame;
+    static public Highscores highscores;
 
     /**
-     * Operation MainMenu.<br />
+     * Operation MainMenu.
      *
-     * - construct this JPanel<br />
-     * - init the components you need for this (see method below)<br />
-     * - remove all elements from the root frame<br />
-     * - add this panel to the root frame
+     * - construct this JPanel - init the components you need for this (see
+     * method below) - remove all elements from the root frame - add this panel
+     * to the root frame
      *
      * @return
      */
@@ -77,14 +84,14 @@ public class MainMenu extends JPanel {
 
         jLabel4.setText("Height");
 
-        txtWidth.setText("");
+        txtWidth.setText("500");
         txtWidth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtWidthActionPerformed(evt);
             }
         });
 
-        txtHeight.setText("");
+        txtHeight.setText("500");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,15 +115,16 @@ public class MainMenu extends JPanel {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(10, 10, 10)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtHeight)
+                            .addComponent(txtWidth, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,7 +142,7 @@ public class MainMenu extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit)
                     .addComponent(btnStartNewGame))
@@ -143,7 +151,7 @@ public class MainMenu extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWidthActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtWidthActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -154,32 +162,71 @@ public class MainMenu extends JPanel {
 
         if (txtHeight.getText().isEmpty() || txtWidth.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill out width and Height");
-        } else if (Pattern.matches("[a-zA-Z]+", txtHeight.getText()) || Pattern.matches("[a-zA-Z]+", txtWidth.getText())) {
+        } else if (!Pattern.matches("^\\d+$", txtHeight.getText() + txtWidth.getText())) {
             JOptionPane.showMessageDialog(null, "Please enter only numbers");
         } else {
-            Application.ROOTFRAME.remove(Application.menu);
-            Dimension playFieldSize = getDimension();
-//            PlayFieldPanel gamePanel = new PlayFieldPanel(playFieldSize, );
-//            Application.ROOTFRAME.add(gamePanel);
+            showPong();
         }
-
-
     }//GEN-LAST:event_btnStartNewGameActionPerformed
 
+    static public void changeView(JPanel view) {
+        ROOTFRAME.getContentPane().removeAll();
+        ROOTFRAME.setLocationRelativeTo(null);
+        ROOTFRAME.setLocationRelativeTo(null);
+        ROOTFRAME.add(view);
+        ROOTFRAME.setVisible(true);
+        ROOTFRAME.repaint(); 
+        view.setFocusable(true);
+        view.setFocusTraversalKeysEnabled(false);
+        view.grabFocus();
+    }
+    
+    static public void showMainMenu() {
+        ROOTFRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ROOTFRAME.setSize(500, 300);
+        ROOTFRAME.setTitle("Pong Main Menu");
+        changeView(mainMenu);
+    }
+    
+    static public void showPong() {
+        ROOTFRAME.setTitle("Pong");
+        pong = new Pong();
+        ROOTFRAME.setSize(getWidthPlayfield(), getHeightPlayfield());
+        changeView(pong);
+    }
+    
+    static public void showAfterGame() {
+        ROOTFRAME.setTitle("Game Over");
+        afterGame = new AfterGame();
+        ROOTFRAME.setSize(500, 300);
+        changeView(afterGame);
+    }
+    
+    static public void showHighscores() {
+        ROOTFRAME.setTitle("Scoreboard");
+        highscores = new Highscores();
+        ROOTFRAME.setSize(500, 400);
+        changeView(highscores);
+    }
+    
+    static public void clearPong() {
+        pong = null;
+    }
+    
     public static Dimension getDimension() {
-        Dimension playFieldSize = new Dimension(getWidthPlayfield(),getHeightPlayfield() );
+        Dimension playFieldSize = new Dimension(getWidthPlayfield(), getHeightPlayfield());
         return playFieldSize;
     }
-    
-    public static int getWidthPlayfield(){
+
+    public static int getWidthPlayfield() {
         return Integer.valueOf(txtWidth.getText());
     }
-    
-    public static int getHeightPlayfield(){
+
+    public static int getHeightPlayfield() {
         return Integer.valueOf(txtHeight.getText());
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnStartNewGame;

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import pong.MainMenu;
 
 /**
  * collects player data if score should be listed on the highscores list
@@ -48,6 +49,7 @@ public class AfterGame extends JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblScore = new javax.swing.JLabel();
+        scoreboardBtn = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -81,32 +83,43 @@ public class AfterGame extends JPanel {
 
         jLabel3.setText("Your score");
 
-        lblScore.setText("50");
+        scoreboardBtn.setText("Scoreboard");
+        scoreboardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scoreboardBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSkip)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnNext)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSkip)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(lblScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(78, 78, 78))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(scoreboardBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNext)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(lblScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(78, 78, 78))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +137,8 @@ public class AfterGame extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSkip)
-                    .addComponent(btnNext))
+                    .addComponent(btnNext)
+                    .addComponent(scoreboardBtn))
                 .addContainerGap())
         );
 
@@ -134,27 +148,41 @@ public class AfterGame extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlayerActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtPlayerActionPerformed
 
     private void btnSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipActionPerformed
-        System.exit(0);
+        MainMenu.showPong();
     }//GEN-LAST:event_btnSkipActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        if (txtPlayer.getText().isEmpty() || lblScore.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please enter your name to save your score");
-        } else {
+        if (
+            !txtPlayer.getText().isEmpty() &&
+            txtPlayer.getText().matches("[A-Za-z0-9]+") &&
+            !lblScore.getText().isEmpty()
+        ) {
             Highscore highscore = new Highscore(txtPlayer.getText(), Integer.valueOf(lblScore.getText()));
-
             try {
                 String scores = HttpRequest.getRequest(addScoresURL + highscore.toString());
             } catch (IOException ex) {
                 Logger.getLogger(HighscoreTableModel.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter your name to save your score");
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void scoreboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreboardBtnActionPerformed
+        MainMenu.showHighscores();
+    }//GEN-LAST:event_scoreboardBtnActionPerformed
+    public void setScore(String score) {
+        lblScore.setText(score);
+    }
+    public void init() {
+        String score = Integer.toString(MainMenu.pong.getScore());
+        lblScore.setText(score);
+        MainMenu.clearPong();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
@@ -165,6 +193,7 @@ public class AfterGame extends JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblScore;
+    private javax.swing.JButton scoreboardBtn;
     private javax.swing.JTextField txtPlayer;
     // End of variables declaration//GEN-END:variables
 }
