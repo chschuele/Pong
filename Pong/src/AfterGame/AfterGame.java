@@ -21,7 +21,7 @@ import pong.MainMenu;
  * collects player data if score should be listed on the highscores list
  */
 public class AfterGame extends JPanel {
-    
+
     private final String addScoresURL = "http://dreamlo.com/lb/rOMiiqMZZU-1k_Q2SayEdg4iDfDzwzXEGFexY1xQhmxw/add/";
 
     /**
@@ -43,7 +43,7 @@ public class AfterGame extends JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnSkip = new javax.swing.JButton();
-        btnNext = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtPlayer = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -62,10 +62,10 @@ public class AfterGame extends JPanel {
             }
         });
 
-        btnNext.setText("Next");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -113,7 +113,7 @@ public class AfterGame extends JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(scoreboardBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNext)
+                        .addComponent(btnSave)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +137,7 @@ public class AfterGame extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSkip)
-                    .addComponent(btnNext)
+                    .addComponent(btnSave)
                     .addComponent(scoreboardBtn))
                 .addContainerGap())
         );
@@ -155,12 +155,10 @@ public class AfterGame extends JPanel {
         MainMenu.showPong();
     }//GEN-LAST:event_btnSkipActionPerformed
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        if (
-            !txtPlayer.getText().isEmpty() &&
-            txtPlayer.getText().matches("[A-Za-z0-9]+") &&
-            !lblScore.getText().isEmpty()
-        ) {
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if (!txtPlayer.getText().isEmpty()
+                && txtPlayer.getText().matches("[A-Za-z0-9]+")
+                && !lblScore.getText().isEmpty()) {
             Highscore highscore = new Highscore(txtPlayer.getText(), Integer.valueOf(lblScore.getText()));
             try {
                 String scores = HttpRequest.getRequest(addScoresURL + highscore.toString());
@@ -170,7 +168,7 @@ public class AfterGame extends JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Please enter your name to save your score");
         }
-    }//GEN-LAST:event_btnNextActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void scoreboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scoreboardBtnActionPerformed
         MainMenu.showHighscores();
@@ -178,6 +176,7 @@ public class AfterGame extends JPanel {
     public void setScore(String score) {
         lblScore.setText(score);
     }
+
     public void init() {
         String score = Integer.toString(MainMenu.pong.getScore());
         lblScore.setText(score);
@@ -185,7 +184,7 @@ public class AfterGame extends JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSkip;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

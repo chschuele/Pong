@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ivan
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
 public class HttpRequest {
 

@@ -13,10 +13,10 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Chauntalle Schüle, Dominik Gryska, Ivan 
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
 public class HighscoreTableModel extends AbstractTableModel {
-    
+
     private String[] columns = {"Player", "Score"};
     private ArrayList<Highscore> highscores;
 
@@ -51,11 +51,11 @@ public class HighscoreTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if(columnIndex == 0) {
+        if (columnIndex == 0) {
             return highscores.get(rowIndex).getPlayerName();
         }
         return highscores.get(rowIndex).getScore();
-        
+
     }
 
 }

@@ -13,9 +13,10 @@ import pong.MainMenu;
 
 /**
  *
- * @author Chauntalle Schüle, Dominik Gryska, Ivan 
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
 public class Highscores extends JPanel {
+
     /**
      * Creates new form Highscores1
      */

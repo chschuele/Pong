@@ -10,10 +10,12 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author ivan
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
 public class Debug {
-        public static final JFrame ROOTFRAME = new JFrame();
+
+    public static final JFrame ROOTFRAME = new JFrame();
+
     /**
      * Operation main
      *

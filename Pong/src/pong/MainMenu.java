@@ -7,7 +7,7 @@ package pong;
 
 /**
  *
- * @author chSch
+ * @author chSch aliv grdo
  */
 import AfterGame.AfterGame;
 import AfterGame.Highscores;
@@ -24,7 +24,7 @@ import static pong.Application.ROOTFRAME;
  * Buttons for exiting and starting the game.
  */
 public class MainMenu extends JPanel {
-    
+
     static public MainMenu mainMenu = new MainMenu();
     static public Pong pong;
     static public AfterGame afterGame;
@@ -175,44 +175,44 @@ public class MainMenu extends JPanel {
         ROOTFRAME.setLocationRelativeTo(null);
         ROOTFRAME.add(view);
         ROOTFRAME.setVisible(true);
-        ROOTFRAME.repaint(); 
+        ROOTFRAME.repaint();
         view.setFocusable(true);
         view.setFocusTraversalKeysEnabled(false);
         view.grabFocus();
     }
-    
+
     static public void showMainMenu() {
         ROOTFRAME.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ROOTFRAME.setSize(500, 300);
         ROOTFRAME.setTitle("Pong Main Menu");
         changeView(mainMenu);
     }
-    
+
     static public void showPong() {
         ROOTFRAME.setTitle("Pong");
         pong = new Pong();
         ROOTFRAME.setSize(getWidthPlayfield(), getHeightPlayfield());
         changeView(pong);
     }
-    
+
     static public void showAfterGame() {
         ROOTFRAME.setTitle("Game Over");
         afterGame = new AfterGame();
         ROOTFRAME.setSize(500, 300);
         changeView(afterGame);
     }
-    
+
     static public void showHighscores() {
         ROOTFRAME.setTitle("Scoreboard");
         highscores = new Highscores();
         ROOTFRAME.setSize(500, 400);
         changeView(highscores);
     }
-    
+
     static public void clearPong() {
         pong = null;
     }
-    
+
     public static Dimension getDimension() {
         Dimension playFieldSize = new Dimension(getWidthPlayfield(), getHeightPlayfield());
         return playFieldSize;

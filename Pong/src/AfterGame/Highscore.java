@@ -7,7 +7,7 @@ package AfterGame;
 
 /**
  *
- * @author chSch
+ * @author Chauntalle Schüle, Dominik Gryska, Ivan
  */
 public class Highscore {
 
@@ -26,7 +26,7 @@ public class Highscore {
     int getScore() {
         return score;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s/%s", getPlayerName(), getScore());
