@@ -4,12 +4,12 @@
 [![Github all releases](https://img.shields.io/github/downloads/chschuele/Pong/total.svg)](https://GitHub.com/chschuele/Pong/releases/)
 [![GitHub contributors](https://img.shields.io/github/contributors/chschuele/Pong.svg)](https://GitHub.com/chschuele/Pong/graphs/contributors/)
 
-A two-player pong game that has background music, smooth ball animation and your scores can be saved to a global scoreboard.
+A two-player pong game that has background music, smooth ball animation and your scores can be saved to the global scoreboard.
 
 ## How to play
 
 The game can be played in the development environment
-or directly through the jar file that can be downloaded from [Releases](https://github.com/chschuele/Pong/releases)
+or directly through the jar file that can be downloaded from [Releases](https://github.com/chschuele/Pong/releases).
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/43969815/51197468-e6ceac80-18f1-11e9-977d-eded8fb71d45.PNG)
