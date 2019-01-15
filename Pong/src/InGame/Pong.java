@@ -41,7 +41,7 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setBackground(Color.PINK);
+        setBackground(Color.decode("#28292A"));
         Graphics2D g2d = (Graphics2D) g;
         height = getHeight();
         width = getWidth();
@@ -54,11 +54,11 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
             Puck.puckY = height / 2 - Puck.PUCK_DIAMETER / 2;
             initialize = false;
         }
-        g2d.setColor(Color.yellow);
+        g2d.setColor(Color.decode("#F5BB00"));
         g2d.fill(Paddle.getBottomPaddle());
-        g2d.setColor(Color.red);
+        g2d.setColor(Color.decode("#39647E"));
         g2d.fill(Paddle.getTopPaddle());
-        g2d.setColor(Color.black);
+        g2d.setColor(Color.decode("#CCCCCC"));
         g2d.fill(Puck.getBall());
 
         String endScore = "Score: " + Integer.toString(score);
