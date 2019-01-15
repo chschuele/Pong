@@ -13,6 +13,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
 
 /**
  *
@@ -40,7 +41,7 @@ public class GameAudio {
             }
             FloatControl audioVolume = (FloatControl) clip.getControl(controlType);
             audioVolume.setValue(
-                    (audioVolume.getMaximum() - Math.abs(audioVolume.getMinimum()))
+                    (audioVolume.getMaximum() + Math.abs(audioVolume.getMinimum()))
                             / 100 * volume + audioVolume.getMinimum()
             );
             clip.start();
@@ -65,6 +66,6 @@ public class GameAudio {
     }
 
     public void mainTheme() {
-        playSound(getFile("music3.wav"), 40f,true);
+        playSound(getFile("music3.wav"), 70f,true);
     }
 }
