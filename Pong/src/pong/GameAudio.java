@@ -25,14 +25,13 @@ public class GameAudio {
     DataLine.Info info;
     Clip clip;
 
-    public void playSound(File file, Float volume, boolean loop) {
+    public void playSound(File file, float volume, boolean loop) {
         try {
             stream = AudioSystem.getAudioInputStream(file);
             format = stream.getFormat();
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
-            //clip.loop(Clip.LOOP_CONTINUOUSLY);
             FloatControl.Type controlType;
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
                 controlType = FloatControl.Type.MASTER_GAIN;
@@ -40,8 +39,10 @@ public class GameAudio {
                 controlType = FloatControl.Type.VOLUME;
             }
             FloatControl audioVolume = (FloatControl) clip.getControl(controlType);
-            //audioVolume.setValue((audioVolume.getMaximum() - audioVolume.getMinimum()) / 100 * volume);
-            audioVolume.setValue(volume);
+            audioVolume.setValue(
+                    (audioVolume.getMaximum() - Math.abs(audioVolume.getMinimum()))
+                            / 100 * volume + audioVolume.getMinimum()
+            );
             clip.start();
             if(loop){
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -56,14 +57,14 @@ public class GameAudio {
     }
 
     public void soundGameOver() {
-        playSound(getFile("go.wav"), -0.0f, false);
+        playSound(getFile("go.wav"), 100f, false);
     }
 
     public void soundBall() {
-        playSound(getFile("ball.wav"), -0.0f,false);
+        playSound(getFile("ball.wav"), 100f,false);
     }
 
     public void mainTheme() {
-        playSound(getFile("music3.wav"), -20.0f,true);
+        playSound(getFile("music3.wav"), 40f,true);
     }
 }
