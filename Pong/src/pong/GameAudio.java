@@ -25,7 +25,7 @@ public class GameAudio {
     DataLine.Info info;
     Clip clip;
 
-    public void playSound(File file, Float volume) {
+    public void playSound(File file, Float volume, boolean loop) {
         try {
             stream = AudioSystem.getAudioInputStream(file);
             format = stream.getFormat();
@@ -43,29 +43,9 @@ public class GameAudio {
             //audioVolume.setValue((audioVolume.getMaximum() - audioVolume.getMinimum()) / 100 * volume);
             audioVolume.setValue(volume);
             clip.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void playMusic(File file, Float volume) {
-        try {
-            stream = AudioSystem.getAudioInputStream(file);
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            FloatControl.Type controlType;
-            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
-                controlType = FloatControl.Type.MASTER_GAIN;
-            } else {
-                controlType = FloatControl.Type.VOLUME;
+            if(loop){
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
             }
-            FloatControl audioVolume = (FloatControl) clip.getControl(controlType);
-            //audioVolume.setValue((audioVolume.getMaximum() - audioVolume.getMinimum()) / 100 * volume);
-            audioVolume.setValue(volume);
-            clip.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,14 +56,14 @@ public class GameAudio {
     }
 
     public void soundGameOver() {
-        playSound(getFile("go.wav"), -0.0f);
+        playSound(getFile("go.wav"), -0.0f, false);
     }
 
     public void soundBall() {
-        playSound(getFile("ball.wav"), -0.0f);
+        playSound(getFile("ball.wav"), -0.0f,false);
     }
 
     public void mainTheme() {
-        playMusic(getFile("music3.wav"), -20.0f);
+        playSound(getFile("music3.wav"), -20.0f,true);
     }
 }
