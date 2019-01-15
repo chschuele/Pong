@@ -5,15 +5,14 @@
  */
 package pong;
 
+import java.io.File;
 import static java.io.File.separator;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 
 /**
  *
@@ -21,33 +20,39 @@ import sun.audio.ContinuousAudioDataStream;
  */
 public class GameAudio {
 
-    private AudioPlayer MGP = AudioPlayer.player;
-    private AudioStream BGM;
-    private AudioData MD;
-    private ContinuousAudioDataStream loop = null;
-    
-    public void playSound(String path) {
+    AudioInputStream stream;
+    AudioFormat format;
+    DataLine.Info info;
+    Clip clip;
+
+    public void playSound(File file, int volume) {
         try {
-            InputStream test = new FileInputStream("sounds" + separator + path);
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-        } catch (FileNotFoundException e) {
-            System.out.print(e.toString());
-        } catch (IOException error) {
-            System.out.print(error.toString());
+            stream = AudioSystem.getAudioInputStream(file);
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+            FloatControl audioVolume = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
+            audioVolume.setValue((audioVolume.getMaximum() - audioVolume.getMinimum()) / 100 * volume);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        MGP.start(loop);
+    }
+    
+    public File getFile (String filename) {
+        return new File("sounds" + separator + filename);
     }
 
     public void soundGameOver() {
-        playSound("go.wav");
+        playSound(getFile("go.wav"), 100);
     }
 
     public void soundBall() {
-        playSound("ball.wav");
+        playSound(getFile("ball.wav"), 100);
     }
-    
+
     public void mainTheme() {
-        playSound("music3.wav");
+        playSound(getFile("music3.wav"), 40);
     }
 }

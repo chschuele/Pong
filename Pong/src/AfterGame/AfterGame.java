@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import pong.GameAudio;
 import pong.MainMenu;
 
 /**
@@ -23,6 +24,7 @@ import pong.MainMenu;
 public class AfterGame extends JPanel {
 
     private final String addScoresURL = "http://dreamlo.com/lb/rOMiiqMZZU-1k_Q2SayEdg4iDfDzwzXEGFexY1xQhmxw/add/";
+    private GameAudio gameAudio = new GameAudio();
 
     /**
      * Creates new form AfterGame1
@@ -180,6 +182,7 @@ public class AfterGame extends JPanel {
     }
 
     public void init() {
+        gameAudio.soundGameOver();
         String score = Integer.toString(MainMenu.pong.getScore());
         lblScore.setText(score);
         MainMenu.clearPong();
