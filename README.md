@@ -1,10 +1,10 @@
 # Pong
 
-[![GitHub version](https://badge.fury.io/gh/chschuele%2FPong.svg)](https://github.com/chschuele/Pong.js)
+[![GitHub version](https://badge.fury.io/gh/chschuele%2FPong.svg)](https://github.com/chschuele/Pong)
 [![Github all releases](https://img.shields.io/github/downloads/chschuele/Pong/total.svg)](https://GitHub.com/chschuele/Pong/releases/)
 [![GitHub contributors](https://img.shields.io/github/contributors/chschuele/Pong.svg)](https://GitHub.com/chschuele/Pong/graphs/contributors/)
 
-The two-player pong game has background music, a Main Menu and your scores are saved to Highscores.
+A two-player pong game that has background music, smooth ball animation and your scores can be saved to a global scoreboard.
 
 ## How to play
 
