@@ -5,15 +5,14 @@
  */
 package pong;
 
-import java.io.File;
 import static java.io.File.separator;
+import java.io.InputStream;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineEvent;
 
 /**
  *
@@ -26,9 +25,10 @@ public class GameAudio {
     DataLine.Info info;
     Clip clip;
 
-    public void playSound(File file, float volume, boolean loop) {
+    public void playSound(String file, float volume, boolean loop) {
         try {
-            stream = AudioSystem.getAudioInputStream(file);
+            InputStream is = getClass().getResourceAsStream(file);
+            stream = AudioSystem.getAudioInputStream(getClass().getResource(file));
             format = stream.getFormat();
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
@@ -53,8 +53,8 @@ public class GameAudio {
         }
     }
 
-    public File getFile(String filename) {
-        return new File("sounds" + separator + filename);
+    public String getFile(String filename) {
+        return separator + "res" + separator + filename;
     }
 
     public void soundGameOver() {
@@ -66,6 +66,6 @@ public class GameAudio {
     }
 
     public void mainTheme() {
-        playSound(getFile("music3.wav"), 70f,true);
+        playSound(getFile("theme.wav"), 70f,true);
     }
 }
