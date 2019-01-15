@@ -32,6 +32,8 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
         t.setInitialDelay(100);
         t.start();
         gameOver = false;
+        Puck.velocityX = 1.0;
+        Puck.velocityY = 1.0;
     }
 
     public int getScore() {
