@@ -9,6 +9,7 @@ import static InGame.Puck.PUCK_DIAMETER;
 import static InGame.Puck.lastDirectionChange;
 import static InGame.Puck.puckX;
 import static InGame.Puck.puckY;
+import static InGame.Puck.velocityX;
 import static InGame.Puck.velocityY;
 import pong.GameAudio;
 import pong.MainMenu;
@@ -18,8 +19,14 @@ import pong.MainMenu;
  * @author chSch
  */
 public class Collision {
-    
+
     private static GameAudio gameAudio = new GameAudio();
+
+    public static void paddleHit() {
+        MainMenu.pong.score++;
+        velocityY *= 1.05;
+        velocityX *= 1.05;
+    }
 
     public static void collisionTopPaddle() {
         if (puckY <= Paddle.paddleHeight + Paddle.inset && velocityY < 0) {
@@ -29,9 +36,8 @@ public class Collision {
                 velocityY = -velocityY;
             }
             if (lastDirectionChange != 2) {
-
                 lastDirectionChange = 2;
-                MainMenu.pong.score++;
+                paddleHit();
             }
         }
 
@@ -47,7 +53,7 @@ public class Collision {
             if (MainMenu.pong.initialize == false && lastDirectionChange != 1) {
 
                 lastDirectionChange = 1;
-                MainMenu.pong.score++;
+                paddleHit();
 
             }
         }
