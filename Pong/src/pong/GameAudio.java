@@ -32,7 +32,13 @@ public class GameAudio {
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(stream);
-            FloatControl audioVolume = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
+            FloatControl.Type controlType;
+            if(clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                controlType = FloatControl.Type.MASTER_GAIN;
+            } else {
+                controlType = FloatControl.Type.VOLUME;
+            }
+            FloatControl audioVolume = (FloatControl) clip.getControl(controlType);
             audioVolume.setValue((audioVolume.getMaximum() - audioVolume.getMinimum()) / 100 * volume);
             clip.start();
         } catch (Exception e) {
