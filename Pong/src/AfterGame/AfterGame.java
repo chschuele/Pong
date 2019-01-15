@@ -164,6 +164,8 @@ public class AfterGame extends JPanel {
                 String scores = HttpRequest.getRequest(addScoresURL + highscore.toString());
             } catch (IOException ex) {
                 Logger.getLogger(HighscoreTableModel.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                MainMenu.showHighscores();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Please enter your name to save your score");

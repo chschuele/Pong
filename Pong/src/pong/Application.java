@@ -9,6 +9,8 @@ package pong;
  *
  * @author chSch aliv grdo
  */
+import static java.io.File.pathSeparator;
+import static java.io.File.separator;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,7 +68,7 @@ public class Application {
         ContinuousAudioDataStream loop = null;
 
         try {
-            InputStream test = new FileInputStream("sounds\\music3.wav");
+            InputStream test = new FileInputStream("sounds"+separator+"music3.wav");
             BGM = new AudioStream(test);
             MD = BGM.getData();
             loop = new ContinuousAudioDataStream(MD);

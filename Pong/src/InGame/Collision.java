@@ -11,6 +11,8 @@ import static InGame.Puck.lastDirectionChange;
 import static InGame.Puck.puckX;
 import static InGame.Puck.puckY;
 import static InGame.Puck.velocityY;
+import static java.io.File.pathSeparator;
+import static java.io.File.separator;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -72,7 +74,7 @@ public class Collision {
         ContinuousAudioDataStream loop = null;
 
         try {
-            InputStream test = new FileInputStream("sounds\\ball.wav");
+            InputStream test = new FileInputStream("sounds"+separator+"ball.wav");
             BGM = new AudioStream(test);
             AudioPlayer.player.start(BGM);
         } catch (FileNotFoundException e) {
