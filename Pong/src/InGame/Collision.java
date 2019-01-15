@@ -20,7 +20,7 @@ import pong.MainMenu;
  */
 public class Collision {
 
-    private static GameAudio gameAudio = new GameAudio();
+    private static final GameAudio gameAudio = new GameAudio();
 
     public static void paddleHit() {
         MainMenu.pong.score++;

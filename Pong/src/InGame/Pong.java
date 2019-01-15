@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
+import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import pong.GameAudio;
 import pong.MainMenu;
 
 public class Pong extends JPanel implements KeyListener, ActionListener {
@@ -32,8 +32,14 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
         t.setInitialDelay(50);
         t.start();
         gameOver = false;
-        Puck.velocityX = 0.2;
-        Puck.velocityY = 0.2;
+        Puck.velocityX = getRandomAngle();
+        Puck.velocityY = getRandomAngle();
+    }
+    
+    public double getRandomAngle() {
+        Random random = new Random();
+        System.out.println((random.nextBoolean() ? 1 : -1));
+        return (0.2 + 0.1 * random.nextDouble()) * (random.nextBoolean() ? 1 : -1);
     }
 
     public int getScore() {
