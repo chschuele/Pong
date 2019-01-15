@@ -8,31 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static java.io.File.pathSeparator;
-import static java.io.File.separator;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashSet;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import pong.GameAudio;
 import pong.MainMenu;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 
 public class Pong extends JPanel implements KeyListener, ActionListener {
 
-    public static int height, width;
-    public static int score = 0;
-    public static boolean initialize;
+    public int height, width;
+    public int score = 0;
+    public boolean initialize;
     private Timer t;
     boolean gameOver = false;
 
-    public static HashSet<String> keysA = new HashSet<String>();
-    public static HashSet<String> keysB = new HashSet<String>();
+    public HashSet<String> keysA = new HashSet<String>();
+    public HashSet<String> keysB = new HashSet<String>();
 
     public Pong() {
         addKeyListener(this);
@@ -44,7 +35,7 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
     }
 
     public int getScore() {
-        return score - 1;
+        return score > 0 ? score - 1 : 0;
     }
 
     @Override
@@ -76,14 +67,12 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
     }
 
     private void updateGame() {
-
         Collision.collisionSideWalls();
         //check collision Top and Bottom Walls
         if (initialize == false && (Puck.puckY < 0 || Puck.puckY + Puck.PUCK_DIAMETER > height)) {
             Puck.velocityY = -Puck.velocityY;
             MainMenu.showAfterGame();
             MainMenu.afterGame.init();
-            soundGameOver();
             gameOver = true;
         } else {
             Collision.collisionBottomPaddle();
@@ -104,7 +93,6 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!gameOver) {
             updateGame();
-
         }
     }
 
@@ -150,21 +138,4 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
         }
     }
 
-    public static void soundGameOver() {
-        AudioPlayer MGP = AudioPlayer.player;
-        AudioStream BGM;
-        AudioData MD;
-        ContinuousAudioDataStream loop = null;
-
-        try {
-            InputStream test = new FileInputStream("sounds"+separator+"go.wav");
-            BGM = new AudioStream(test);
-            AudioPlayer.player.start(BGM);
-        } catch (FileNotFoundException e) {
-            System.out.print(e.toString());
-        } catch (IOException error) {
-            System.out.print(error.toString());
-        }
-        MGP.start(loop);
-    }
 }

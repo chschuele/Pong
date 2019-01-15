@@ -7,6 +7,7 @@ package InGame;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import pong.MainMenu;
 
 public class Paddle {
 
@@ -16,7 +17,7 @@ public class Paddle {
     public static int inset = 0;
 
     public static Rectangle2D getBottomPaddle() {
-        Rectangle2D bottomPaddle = new Rectangle(bottomPaddleX, Pong.height - paddleHeight - inset, paddleWidth, paddleHeight);
+        Rectangle2D bottomPaddle = new Rectangle(bottomPaddleX, MainMenu.pong.height - paddleHeight - inset, paddleWidth, paddleHeight);
         return bottomPaddle;
     }
 
@@ -26,21 +27,21 @@ public class Paddle {
     }
 
     public static void movePlayerA() {
-        if (Pong.keysA.size() == 1) {
-            if (Pong.keysA.contains("LEFT")) {
+        if (MainMenu.pong != null && MainMenu.pong.keysA.size() == 1) {
+            if (MainMenu.pong.keysA.contains("LEFT")) {
                 bottomPaddleX -= (bottomPaddleX > 0) ? SPEED_PADDLE : 0;
-            } else if (Pong.keysA.contains("RIGHT")) {
-                bottomPaddleX += (bottomPaddleX < Pong.width - paddleWidth) ? SPEED_PADDLE : 0;
+            } else if (MainMenu.pong.keysA.contains("RIGHT")) {
+                bottomPaddleX += (bottomPaddleX < MainMenu.pong.width - paddleWidth) ? SPEED_PADDLE : 0;
             }
         }
     }
 
     public static void movePlayerB() {
-        if (Pong.keysB.size() == 1) {
-            if (Pong.keysB.contains("VK_A")) {
+        if (MainMenu.pong != null && MainMenu.pong.keysB.size() == 1) {
+            if (MainMenu.pong.keysB.contains("VK_A")) {
                 topPaddleX -= (topPaddleX > 0) ? SPEED_PADDLE : 0;
-            } else if (Pong.keysB.contains("VK_D")) {
-                topPaddleX += (topPaddleX < Pong.width - paddleWidth) ? SPEED_PADDLE : 0;
+            } else if (MainMenu.pong.keysB.contains("VK_D")) {
+                topPaddleX += (topPaddleX < MainMenu.pong.width - paddleWidth) ? SPEED_PADDLE : 0;
             }
         }
     }
