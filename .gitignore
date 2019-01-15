@@ -28,3 +28,4 @@ hs_err_pid*
 /PONGBeispiel/nbproject/private/
 /PONGBeispiel/build/
 #/Pong/dist/
+!/Pong/dist/Pong.jar
