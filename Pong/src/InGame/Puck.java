@@ -9,7 +9,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Puck {
 
-    public static double puckX, puckY, velocityX = 1.0, velocityY = 1.0;
+    public static double puckX, puckY, velocityX = 0.1, velocityY = 0.1;
     public static final int PUCK_DIAMETER = 20;
     public static int lastDirectionChange;
 

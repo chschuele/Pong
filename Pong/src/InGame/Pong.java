@@ -28,12 +28,12 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
     public Pong() {
         addKeyListener(this);
         initialize = true;
-        t = new Timer(5, this);
-        t.setInitialDelay(100);
+        t = new Timer(1, this);
+        t.setInitialDelay(50);
         t.start();
         gameOver = false;
-        Puck.velocityX = 1.0;
-        Puck.velocityY = 1.0;
+        Puck.velocityX = 0.2;
+        Puck.velocityY = 0.2;
     }
 
     public int getScore() {
@@ -68,7 +68,7 @@ public class Pong extends JPanel implements KeyListener, ActionListener {
         g2d.drawString(endScore, 50, height / 2);
     }
 
-    private void updateGame() {
+    public void updateGame() {
         Collision.collisionSideWalls();
         //check collision Top and Bottom Walls
         if (initialize == false && (Puck.puckY < 0 || Puck.puckY + Puck.PUCK_DIAMETER > height)) {

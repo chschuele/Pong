@@ -11,18 +11,18 @@ import pong.MainMenu;
 
 public class Paddle {
 
-    public static final int SPEED_PADDLE = 2;
+    public static final double SPEED_PADDLE = 0.5;
     public static int paddleHeight = 10, paddleWidth = 100;
-    public static int bottomPaddleX, topPaddleX;
+    public static double bottomPaddleX, topPaddleX;
     public static int inset = 0;
 
     public static Rectangle2D getBottomPaddle() {
-        Rectangle2D bottomPaddle = new Rectangle(bottomPaddleX, MainMenu.pong.height - paddleHeight - inset, paddleWidth, paddleHeight);
+        Rectangle2D bottomPaddle = new Rectangle((int) bottomPaddleX, MainMenu.pong.height - paddleHeight - inset, paddleWidth, paddleHeight);
         return bottomPaddle;
     }
 
     public static Rectangle2D getTopPaddle() {
-        Rectangle2D topPaddle = new Rectangle(topPaddleX, inset, paddleWidth, paddleHeight);
+        Rectangle2D topPaddle = new Rectangle((int) topPaddleX, inset, paddleWidth, paddleHeight);
         return topPaddle;
     }
 
